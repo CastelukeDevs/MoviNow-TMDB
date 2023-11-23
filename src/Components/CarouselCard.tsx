@@ -20,6 +20,7 @@ import {textStyle} from '../Utilities/Styles/GlobalStyle';
 import useIsSubscribed from '../Utilities/Hooks/useIsSubscribed';
 import {useDispatch} from 'react-redux';
 import {addSubscribe, removeSubscribe} from '../Redux/Reducers/DefaultReducer';
+import GenreList from './GenreList';
 
 type ICarouselCardPropTypes = {
   width: number;
@@ -72,6 +73,7 @@ const CarouselCard = (prop: ICarouselCardPropTypes) => {
               </Text>
             </View>
             <Text style={[textStyle.Hero_Bold]}>{prop.item.title}</Text>
+            <GenreList item={prop.item.genre_ids} />
           </>
         </TouchableOpacity>
       </LinearGradient>
