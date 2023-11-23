@@ -1,7 +1,7 @@
 import {ActionReducerMapBuilder, createAsyncThunk} from '@reduxjs/toolkit';
 import APICall from '../../Utilities/APIs/APIRequest';
 import {IEndpoint} from '../../Utilities/APIs/APIUtils';
-import {IDefaultState} from '../Reducers/DefaultReducer';
+import {IGenreState} from '../Reducers/GenreReducer';
 
 const GetGenresPrefix: IEndpoint = 'GET_GENRES';
 
@@ -11,7 +11,7 @@ export const fetchGenres = createAsyncThunk(GetGenresPrefix, async () => {
   return result;
 });
 
-export default (builder: ActionReducerMapBuilder<IDefaultState>) => {
+export default (builder: ActionReducerMapBuilder<IGenreState>) => {
   builder
     .addCase(fetchGenres.pending, state => {
       state.error = null;

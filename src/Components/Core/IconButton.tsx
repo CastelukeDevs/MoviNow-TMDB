@@ -28,9 +28,7 @@ const IconButton = (props: IIconButtonProp) => {
     props.mode === 'contained' ? GlobalColor.light : GlobalColor.accent;
 
   return (
-    <TouchableOpacity
-      style={{flexDirection: 'row'}}
-      onPress={() => props.onPress()}>
+    <TouchableOpacity style={{flexDirection: 'row'}} onPress={props.onPress}>
       <View
         style={[
           {

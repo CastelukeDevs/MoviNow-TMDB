@@ -1,22 +1,7 @@
-import {
-  Animated,
-  Dimensions,
-  FlatList,
-  Image,
-  ImageBackground,
-  SafeAreaView,
-  StyleSheet,
-  Text,
-  View,
-} from 'react-native';
+import {Animated, Dimensions, StyleSheet, View} from 'react-native';
 import React, {useRef} from 'react';
 import {IMovie} from '../Types/MovieTypes';
-import LinearGradient from 'react-native-linear-gradient';
 import GlobalColor from '../Utilities/Styles/GlobalColor';
-import {textStyle} from '../Utilities/Styles/GlobalStyle';
-import Icon from './Core/Icon';
-import {getImageUrl} from '../Utilities/APIs/ImageUtils';
-import IconButton from './Core/IconButton';
 import CarouselCard from './CarouselCard';
 
 const {width: wWidth, height: wHeight} = Dimensions.get('window');
@@ -29,19 +14,21 @@ const ContainerHorizontalSpacing = wWidth / 2 - (DotSize + DotSpacing) * 2.5;
 type ICarouselPropTypes = {
   item: IMovie[];
   maxItem?: number;
+  onItemPress?: (movie: IMovie) => void;
 };
 
 const Carousel = (prop: ICarouselPropTypes) => {
   const scrollX = useRef(new Animated.Value(0)).current;
 
   const moviesCarouselData = prop.item.slice(0, prop.maxItem || 5);
+
   return (
     <View style={{flex: 1}}>
       <Animated.FlatList
         horizontal
         style={[{zIndex: 1, height: wHeight, flex: 1}]}
         data={moviesCarouselData}
-        keyExtractor={item => item.id.toString()}
+        keyExtractor={(_, i) => i.toString()}
         snapToInterval={wWidth}
         decelerationRate={0}
         showsHorizontalScrollIndicator={false}
@@ -56,10 +43,10 @@ const Carousel = (prop: ICarouselPropTypes) => {
             item={item}
             width={wWidth}
             textContainerStyle={{
-              paddingBottom: 20 + DotActiveSize,
+              paddingBottom: 30 + DotActiveSize,
             }}
             onPress={() => {
-              console.log('PRESSED');
+              prop.onItemPress?.(item);
             }}
           />
         )}

@@ -1,13 +1,11 @@
-import {Image, StyleSheet, Text, View} from 'react-native';
 import React from 'react';
-import {FlatList} from 'react-native-gesture-handler';
 import {IMovie} from '../Types/MovieTypes';
-import {getImageUrl} from '../Utilities/APIs/ImageUtils';
-import {textStyle} from '../Utilities/Styles/GlobalStyle';
 import MovieHorizontalListItem from './MovieHorizontalListItem';
+import {FlatList} from 'react-native';
 
 type IMovieHorizontalListPropTypes = {
   item: IMovie[];
+  onItemPress?: (movie: IMovie) => void;
 };
 
 const MovieHorizontalList = (props: IMovieHorizontalListPropTypes) => {
@@ -15,12 +13,14 @@ const MovieHorizontalList = (props: IMovieHorizontalListPropTypes) => {
   const itemSpacing = 10;
   const itemHeight = 200;
 
+  const movieList = props.item.slice(0, 10);
+
   return (
     <FlatList
       horizontal
       style={[{flex: 1}]}
-      data={props.item}
-      keyExtractor={item => item.id.toString()}
+      data={movieList}
+      keyExtractor={(_, i) => i.toString()}
       snapToInterval={itemWidth + itemSpacing}
       decelerationRate={0}
       showsHorizontalScrollIndicator={false}
@@ -37,6 +37,7 @@ const MovieHorizontalList = (props: IMovieHorizontalListPropTypes) => {
               borderRadius: 8,
               overflow: 'hidden',
             }}
+            onPress={() => props.onItemPress?.(item)}
           />
         );
       }}
@@ -45,5 +46,3 @@ const MovieHorizontalList = (props: IMovieHorizontalListPropTypes) => {
 };
 
 export default MovieHorizontalList;
-
-const styles = StyleSheet.create({});

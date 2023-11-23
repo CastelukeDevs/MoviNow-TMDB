@@ -23,6 +23,6 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: GlobalColor.accent,
     borderRadius: 100,
-    marginRight: 8,
+    margin: 4,
   },
 });

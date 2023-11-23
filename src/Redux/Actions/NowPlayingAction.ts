@@ -3,19 +3,24 @@ import APICall from '../../Utilities/APIs/APIRequest';
 import {IDiscoverState} from '../Reducers/DiscoverReducer';
 import {RootStateType} from '../Store';
 
-export const fetchDiscover = createAsyncThunk('FETCH_DISCOVER', async () => {
-  const result = await APICall('GET_MOVIE', {params: {language: 'en-US'}});
+export const fetchNowPlaying = createAsyncThunk(
+  'FETCH_NOW_PLAYING',
+  async () => {
+    const result = await APICall('GET_NOW_PLAYING', {
+      params: {language: 'en-US'},
+    });
 
-  return result;
-});
+    return result;
+  },
+);
 
-export const fetchDiscoverNext = createAsyncThunk(
-  'FETCH_DISCOVER_NEXT',
-  async (args, {getState}) => {
+export const fetchNowPlayingNext = createAsyncThunk(
+  'FETCH_NOW_PLAYING_NEXT',
+  async (_, {getState}) => {
     const discoverPage = getState() as RootStateType;
     console.log('discoverPage', discoverPage);
     const selectedPage = discoverPage.discover.pages;
-    const fetch = await APICall('GET_MOVIE', {
+    const fetch = await APICall('GET_NOW_PLAYING', {
       params: {page: selectedPage + 1, language: 'en-US'},
     });
 
@@ -25,17 +30,17 @@ export const fetchDiscoverNext = createAsyncThunk(
 
 export default (builder: ActionReducerMapBuilder<IDiscoverState>) => {
   builder
-    .addCase(fetchDiscover.pending, state => {
+    .addCase(fetchNowPlaying.pending, state => {
       state.error = null;
       state.isLoading = true;
       state.isSuccess = null;
     })
-    .addCase(fetchDiscover.rejected, (state, action: any) => {
+    .addCase(fetchNowPlaying.rejected, (state, action: any) => {
       state.error = {isError: true, message: action.payload.message};
       state.isLoading = false;
       state.isSuccess = false;
     })
-    .addCase(fetchDiscover.fulfilled, (state, action) => {
+    .addCase(fetchNowPlaying.fulfilled, (state, action) => {
       const dataset = action.payload;
       state.error = {isError: false, message: null};
       state.isLoading = false;
@@ -43,17 +48,17 @@ export default (builder: ActionReducerMapBuilder<IDiscoverState>) => {
       state.movies = dataset.results;
       state.pages = dataset.page;
     })
-    .addCase(fetchDiscoverNext.pending, state => {
+    .addCase(fetchNowPlayingNext.pending, state => {
       state.error = null;
       state.isLoading = true;
       state.isSuccess = null;
     })
-    .addCase(fetchDiscoverNext.rejected, (state, action: any) => {
+    .addCase(fetchNowPlayingNext.rejected, (state, action: any) => {
       state.error = {isError: true, message: action.payload.message};
       state.isLoading = false;
       state.isSuccess = false;
     })
-    .addCase(fetchDiscoverNext.fulfilled, (state, action) => {
+    .addCase(fetchNowPlayingNext.fulfilled, (state, action) => {
       const dataset = action.payload;
       state.error = {isError: false, message: null};
       state.isLoading = false;

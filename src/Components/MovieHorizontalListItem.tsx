@@ -13,7 +13,10 @@ import {textStyle} from '../Utilities/Styles/GlobalStyle';
 import IconButton from './Core/IconButton';
 import useIsSubscribed from '../Utilities/Hooks/useIsSubscribed';
 import {useDispatch} from 'react-redux';
-import {addSubscribe, removeSubscribe} from '../Redux/Reducers/DefaultReducer';
+import {
+  addSubscribe,
+  removeSubscribe,
+} from '../Redux/Reducers/SubscribeReducer';
 
 type MovieHorizontalListItemPropTypes = {
   item: IMovie;
@@ -49,5 +52,3 @@ const MovieHorizontalListItem = (prop: MovieHorizontalListItemPropTypes) => {
 };
 
 export default MovieHorizontalListItem;
-
-const styles = StyleSheet.create({});

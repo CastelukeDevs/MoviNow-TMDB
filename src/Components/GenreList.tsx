@@ -1,4 +1,4 @@
-import {FlatList, ScrollView, StyleSheet, Text, View} from 'react-native';
+import {View} from 'react-native';
 import React from 'react';
 import {IGenre} from '../Types/MovieTypes';
 import {useSelector} from 'react-redux';
@@ -10,7 +10,7 @@ type IGenreListPropType = {
 };
 const GenreList = (prop: IGenreListPropType) => {
   const genreList = useSelector(
-    (state: RootStateType) => state.default.genresList,
+    (state: RootStateType) => state.genre.genresList,
   );
   const genre: IGenre[] = [];
   prop.item.forEach(id => {
@@ -22,6 +22,7 @@ const GenreList = (prop: IGenreListPropType) => {
     <View
       style={{
         flexDirection: 'row',
+        flexWrap: 'wrap',
       }}>
       {genre.map((item, index) => (
         <Pills key={index} label={item.name} />
@@ -31,5 +32,3 @@ const GenreList = (prop: IGenreListPropType) => {
 };
 
 export default GenreList;
-
-const styles = StyleSheet.create({});

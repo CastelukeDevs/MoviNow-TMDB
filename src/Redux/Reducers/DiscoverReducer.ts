@@ -1,5 +1,5 @@
-import {PayloadAction, createSlice} from '@reduxjs/toolkit';
-import {IDefaultFetchState, IErrorMessage, IUser} from '../../Types/Types';
+import {createSlice} from '@reduxjs/toolkit';
+import {IDefaultFetchState} from '../../Types/Types';
 import {IMovie} from '../../Types/MovieTypes';
 import DiscoverAction from '../Actions/DiscoverAction';
 

@@ -3,7 +3,7 @@ import {RootStateType} from '../../Redux/Store';
 
 export default (movieID: number) => {
   const subsList = useSelector(
-    (state: RootStateType) => state.default.subscribedList,
+    (state: RootStateType) => state.subscribe.movies,
   );
 
   if (subsList === null || subsList === undefined || subsList?.length < 1)
