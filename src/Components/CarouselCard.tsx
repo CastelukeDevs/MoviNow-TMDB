@@ -18,6 +18,8 @@ import Icon from './Core/Icon';
 import GlobalColor from '../Utilities/Styles/GlobalColor';
 import {textStyle} from '../Utilities/Styles/GlobalStyle';
 import useIsSubscribed from '../Utilities/Hooks/useIsSubscribed';
+import {useDispatch} from 'react-redux';
+import {addSubscribe, removeSubscribe} from '../Redux/Reducers/DefaultReducer';
 
 type ICarouselCardPropTypes = {
   width: number;
@@ -26,7 +28,13 @@ type ICarouselCardPropTypes = {
   onPress?: () => void;
 };
 const CarouselCard = (prop: ICarouselCardPropTypes) => {
+  const dispatch = useDispatch<any>();
   const isSubscribed = useIsSubscribed(prop.item.id);
+
+  const toggleSubscribe = () => {
+    if (isSubscribed) return dispatch(removeSubscribe(prop.item.id));
+    dispatch(addSubscribe(prop.item));
+  };
 
   return (
     <ImageBackground
@@ -47,7 +55,7 @@ const CarouselCard = (prop: ICarouselCardPropTypes) => {
         <SafeAreaView style={{flex: 1, paddingTop: 30, alignItems: 'flex-end'}}>
           <IconButton
             name={isSubscribed ? 'bookmark' : 'bookmark-outline'}
-            onPress={() => {}}
+            onPress={toggleSubscribe}
             mode="contained"
           />
         </SafeAreaView>

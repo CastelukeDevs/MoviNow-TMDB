@@ -1,11 +1,11 @@
 import {PayloadAction, createSlice} from '@reduxjs/toolkit';
-import {IDefaultFetchState, IErrorMessage, IUser} from '../../Types/Types';
+import {IDefaultFetchState} from '../../Types/Types';
 import DefaultAction from '../Actions/DefaultAction';
 import {IGenre, IMovie, IMovieLite} from '../../Types/MovieTypes';
 
 export type IDefaultState = {
   genresList: IGenre[];
-  subscribedList: IMovieLite[];
+  subscribedList: IMovie[];
 } & IDefaultFetchState;
 
 export const defaultInitialState: IDefaultState = {
@@ -20,18 +20,17 @@ const DefaultReducer = createSlice({
   name: 'default',
   initialState: defaultInitialState,
   reducers: {
-    // setUser: (state: IDefaultState, action: PayloadAction<IUser>) => {
-    //   const userData = action.payload;
-    //   state.userData = userData;
-    // },
-    // removeUser: (state: IDefaultState) => {
-    //   state.userData = null;
-    //   state.isLoading = false;
-    //   state.error = null;
-    // },
+    addSubscribe: (state: IDefaultState, action: PayloadAction<IMovie>) => {
+      state.subscribedList = [...state.subscribedList, action.payload];
+    },
+    removeSubscribe: (state: IDefaultState, action: PayloadAction<number>) => {
+      state.subscribedList = state.subscribedList.filter(
+        item => item.id !== action.payload,
+      );
+    },
   },
   extraReducers: DefaultAction,
 });
 
-export const {} = DefaultReducer.actions;
+export const {addSubscribe, removeSubscribe} = DefaultReducer.actions;
 export default DefaultReducer;

@@ -21,7 +21,7 @@ const SplashScreen = (props: IMainNavPropTypes<'SplashScreen'>) => {
     prepareData();
 
     if (genre.isSuccess && discover.isSuccess) {
-      console.log('ready to move');
+      // console.log('ready to move');
       props.navigation.navigate('HomeScreen');
     }
     return () => {};

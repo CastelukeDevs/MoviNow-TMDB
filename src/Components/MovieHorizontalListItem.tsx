@@ -12,6 +12,8 @@ import {getImageUrl} from '../Utilities/APIs/ImageUtils';
 import {textStyle} from '../Utilities/Styles/GlobalStyle';
 import IconButton from './Core/IconButton';
 import useIsSubscribed from '../Utilities/Hooks/useIsSubscribed';
+import {useDispatch} from 'react-redux';
+import {addSubscribe, removeSubscribe} from '../Redux/Reducers/DefaultReducer';
 
 type MovieHorizontalListItemPropTypes = {
   item: IMovie;
@@ -20,7 +22,13 @@ type MovieHorizontalListItemPropTypes = {
   onPress?: () => void;
 };
 const MovieHorizontalListItem = (prop: MovieHorizontalListItemPropTypes) => {
+  const dispatch = useDispatch<any>();
   const isSubscribed = useIsSubscribed(prop.item.id);
+
+  const toggleSubscribe = () => {
+    if (isSubscribed) return dispatch(removeSubscribe(prop.item.id));
+    dispatch(addSubscribe(prop.item));
+  };
 
   return (
     <View style={prop.containerStyle}>
@@ -31,7 +39,7 @@ const MovieHorizontalListItem = (prop: MovieHorizontalListItemPropTypes) => {
         />
         <IconButton
           name={isSubscribed ? 'bookmark' : 'bookmark-outline'}
-          onPress={() => {}}
+          onPress={toggleSubscribe}
           mode="icon"
         />
       </TouchableOpacity>

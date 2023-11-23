@@ -24,6 +24,9 @@ const HomeScreen = (props: IMainNavPropTypes<'HomeScreen'>) => {
 
   const discover = useSelector((state: RootStateType) => state.discover.movies);
   const genre = useSelector((state: RootStateType) => state.default.genresList);
+  const subscribed = useSelector(
+    (state: RootStateType) => state.default.subscribedList,
+  );
 
   const clearAsyncStorage = async () => {
     AsyncStorage.clear();
@@ -45,6 +48,15 @@ const HomeScreen = (props: IMainNavPropTypes<'HomeScreen'>) => {
           onSeeMorePress={nowPlayingSeeMoreHandler}
         />
         <MovieHorizontalList item={discover} />
+        {subscribed.length > 0 && (
+          <>
+            <SectionHeader
+              label="Bookmarked"
+              onSeeMorePress={nowPlayingSeeMoreHandler}
+            />
+            <MovieHorizontalList item={subscribed} />
+          </>
+        )}
       </ScrollView>
     </View>
   );
