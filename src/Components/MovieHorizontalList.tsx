@@ -30,7 +30,7 @@ const MovieHorizontalList = (props: IMovieHorizontalListPropTypes) => {
         return (
           <MovieHorizontalListItem
             item={item}
-            containerStyle={{width: itemWidth, marginRight: itemSpacing}}
+            containerStyle={{width: itemWidth, marginLeft: itemSpacing}}
             imageStyle={{
               width: itemWidth,
               height: itemHeight,
