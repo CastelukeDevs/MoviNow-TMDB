@@ -30,24 +30,27 @@ const Button = (props: IButtonProp) => {
       style={[
         currentMode === 'contained' && {
           backgroundColor: GlobalColor.accent,
-          borderRadius: 100,
+          borderRadius: 8,
         },
         {
           padding: 12,
         },
+        props.icon && {flexDirection: 'row', justifyContent: 'flex-end'},
         props.containerStyle,
       ]}>
-      {/* {props.icon && <Icon {...props.icon} />} */}
+      {props.icon && <Icon {...props.icon} color={GlobalColor.light} />}
       {props.label && (
         <Text
           style={[
             textStyle.SubTitle_Bold,
-            {textAlign: 'center'},
+            {textAlign: 'center', textAlignVertical: 'center'},
             {
               color:
                 currentMode === 'contained'
                   ? GlobalColor.light
                   : GlobalColor.accent,
+
+              // backgroundColor: 'red',
             },
             props.labelStyle,
           ]}>

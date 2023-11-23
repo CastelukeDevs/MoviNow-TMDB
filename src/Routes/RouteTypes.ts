@@ -4,11 +4,19 @@ import {
   NavigatorScreenParams,
 } from '@react-navigation/native';
 import {StackScreenProps} from '@react-navigation/stack';
+import {IMovie} from '../Types/MovieTypes';
+
+export type MovieListScreenType =
+  | 'Now-Playing'
+  | 'Discover'
+  | 'Upcoming'
+  | 'Bookmark';
 
 export type IMainNav = {
   SplashScreen: undefined;
-  SignInScreen: undefined;
+  MovieDetailScreen: IMovie;
   HomeScreen: undefined;
+  MovieListScreen: {type: MovieListScreenType};
 };
 
 export type IMainNavPropTypes<T extends keyof IMainNav> = StackScreenProps<

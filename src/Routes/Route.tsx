@@ -14,7 +14,8 @@ import {IMainNav} from './RouteTypes';
 
 import SplashScreen from '../Screens/SplashScreen';
 import HomeScreen from '../Screens/Dashboard/HomeScreen';
-import SignInScreen from '../Screens/SignInScreen';
+import MovieDetailScreen from '../Screens/Dashboard/MovieDetailScreen';
+import MovieListsScreen from '../Screens/Dashboard/MovieListsScreen';
 
 const Stack = createStackNavigator<IMainNav>();
 
@@ -38,9 +39,12 @@ const Route = () => {
         <Stack.Navigator screenOptions={defaultScreenOptions}>
           <Stack.Screen name="SplashScreen" component={SplashScreen} />
           <Stack.Screen name="HomeScreen" component={HomeScreen} />
-          <Stack.Group screenOptions={{presentation: 'modal'}}>
-            <Stack.Screen name="SignInScreen" component={SignInScreen} />
-          </Stack.Group>
+          <Stack.Screen
+            name="MovieDetailScreen"
+            component={MovieDetailScreen}
+          />
+          <Stack.Screen name="MovieListScreen" component={MovieListsScreen} />
+          {/* <Stack.Group screenOptions={{presentation: 'modal'}}></Stack.Group> */}
         </Stack.Navigator>
       </NavigationContainer>
     </SafeAreaProvider>

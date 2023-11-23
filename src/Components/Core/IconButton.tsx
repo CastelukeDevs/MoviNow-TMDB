@@ -11,7 +11,7 @@ import GlobalColor from '../../Utilities/Styles/GlobalColor';
 
 type IIconButtonProp = {
   style?: ViewStyle;
-  mode?: 'contained' | 'bordered';
+  mode?: 'contained' | 'bordered' | 'icon';
   onPress: () => void;
 } & IIconProps;
 
@@ -25,21 +25,21 @@ type IIconButtonProp = {
 const IconButton = (props: IIconButtonProp) => {
   const currentMode = props.mode || 'contained';
   const currentLogoColor =
-    props.mode === 'contained' ? GlobalColor.accent : GlobalColor.light;
+    props.mode === 'contained' ? GlobalColor.light : GlobalColor.accent;
 
   return (
-    <TouchableOpacity
-      style={{flexDirection: 'row'}}
-      onPress={() => props.onPress()}>
+    <TouchableOpacity style={{flexDirection: 'row'}} onPress={props.onPress}>
       <View
         style={[
           {
             padding: 12,
             borderRadius: 12,
           },
-          currentMode === 'contained'
+          currentMode === 'bordered'
+            ? styles.ModeBorderedContainer
+            : currentMode === 'contained'
             ? styles.ModeContainedContainer
-            : styles.ModeBorderedContainer,
+            : {},
           props.style,
         ]}>
         <Icon {...props} color={currentLogoColor} />

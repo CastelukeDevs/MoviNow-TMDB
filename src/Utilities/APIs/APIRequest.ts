@@ -1,18 +1,19 @@
 import axios, {AxiosError} from 'axios';
 import {IAPIsCallOption, IEndpoint, getEndpoint} from './APIUtils';
-import {BASE_URL} from '@env';
+import {BASE_URL, TMDB_ACCESS_TOKEN} from '@env';
 
 const BaseURL = BASE_URL;
+const Token = TMDB_ACCESS_TOKEN;
 
 const APICall = async (endpoint: IEndpoint, options?: IAPIsCallOption) => {
   axios.defaults.baseURL = BaseURL;
 
+  const selectEndpoint = getEndpoint(endpoint)!;
   console.log('new Api call with detail:', {
     endpoint,
     options: options,
+    selectEndpoint,
   });
-
-  const selectEndpoint = getEndpoint(endpoint)!;
 
   return await axios({
     method: selectEndpoint.method,
@@ -20,8 +21,13 @@ const APICall = async (endpoint: IEndpoint, options?: IAPIsCallOption) => {
     data: options?.payload,
     params: options?.params,
     cancelToken: options?.cancelToken,
+    headers: {
+      Accept: 'application/json',
+      Authorization: `Bearer ${Token}`,
+    },
   })
     .then(result => {
+      console.info('axios request success', result);
       return result.data;
     })
     .catch((error: AxiosError) => {
