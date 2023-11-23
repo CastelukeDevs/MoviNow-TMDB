@@ -1,10 +1,11 @@
 import {PayloadAction, createSlice} from '@reduxjs/toolkit';
 import {IDefaultFetchState, IErrorMessage, IUser} from '../../Types/Types';
 import DefaultAction from '../Actions/DefaultAction';
-import {IGenre} from '../../Types/MovieTypes';
+import {IGenre, IMovie, IMovieLite} from '../../Types/MovieTypes';
 
 export type IDefaultState = {
   genresList: IGenre[];
+  subscribedList: IMovieLite[];
 } & IDefaultFetchState;
 
 export const defaultInitialState: IDefaultState = {
@@ -12,6 +13,7 @@ export const defaultInitialState: IDefaultState = {
   error: null,
   isSuccess: null,
   genresList: [],
+  subscribedList: [],
 };
 
 const DefaultReducer = createSlice({

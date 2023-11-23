@@ -30,7 +30,8 @@ const Button = (props: IButtonProp) => {
       style={[
         currentMode === 'contained' && {
           backgroundColor: GlobalColor.accent,
-          borderRadius: 100,
+          borderRadius: 8,
+          flex: 1,
         },
         {
           padding: 12,
@@ -46,7 +47,7 @@ const Button = (props: IButtonProp) => {
             {
               color:
                 currentMode === 'contained'
-                  ? GlobalColor.light
+                  ? GlobalColor.dark
                   : GlobalColor.accent,
             },
             props.labelStyle,

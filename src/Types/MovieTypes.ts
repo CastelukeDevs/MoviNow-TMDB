@@ -15,6 +15,12 @@ export type IMovie = {
   vote_count: number;
 };
 
+export type IMovieLite = {
+  id: number;
+  poster_path: string;
+  title: string;
+};
+
 export type IGenre = {
   id: number;
   name: string;
