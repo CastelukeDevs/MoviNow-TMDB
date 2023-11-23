@@ -10,7 +10,12 @@ type ISectionHeaderPropTypes = {
 };
 const SectionHeader = (props: ISectionHeaderPropTypes) => {
   return (
-    <View style={{flexDirection: 'row', alignItems: 'center'}}>
+    <View
+      style={{
+        flexDirection: 'row',
+        alignItems: 'center',
+        paddingHorizontal: 8,
+      }}>
       <Text style={[textStyle.H1_Bold, {flex: 1}]}>{props.label}</Text>
       {typeof props.onSeeMorePress === 'function' && (
         <Button label="See more" onPress={props.onSeeMorePress} mode="text" />

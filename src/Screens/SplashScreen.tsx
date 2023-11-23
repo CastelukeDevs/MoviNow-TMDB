@@ -24,7 +24,7 @@ const SplashScreen = (props: IMainNavPropTypes<'SplashScreen'>) => {
       dispatch(fetchGenres());
     }
     if (genre.isSuccess) {
-      props.navigation.navigate('HomeScreen');
+      props.navigation.replace('HomeScreen');
     }
 
     return () => {};
